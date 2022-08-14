@@ -1,0 +1,58 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UsersModule = void 0;
+const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const entities_1 = require("../../entities");
+const mail_service_1 = require("../../../utils/mail/mail.service");
+const sms_service_1 = require("../../../utils/sms/sms.service");
+const user_entity_1 = require("../../entities/user.entity");
+const userNotification_entity_1 = require("../../entities/userNotification.entity");
+const user_notifications_service_1 = require("../user-noti-controller/user-notifications.service");
+const users_controller_1 = require("./users.controller");
+const users_service_1 = require("./users.service");
+const userAddress_entity_1 = require("../../entities/userAddress.entity");
+let UsersModule = class UsersModule {
+};
+UsersModule = __decorate([
+    (0, common_1.Module)({
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([
+                user_entity_1.moleculus_user,
+                entities_1.moleculus_sip_transactions,
+                entities_1.moleculus_sip,
+                entities_1.moleculus_states,
+                entities_1.moleculus_countries,
+                entities_1.moleculus_index_tokens,
+                entities_1.moleculus_user_kyc,
+                userNotification_entity_1.moleculus_user_notification,
+                userAddress_entity_1.moleculus_user_address,
+                entities_1.moleculus_email_template,
+            ]),
+        ],
+        controllers: [users_controller_1.UsersController],
+        providers: [
+            { provide: "USER_SERVICE", useClass: users_service_1.UsersService },
+            {
+                provide: "SMS_SERVICE",
+                useClass: sms_service_1.SMSService,
+            },
+            {
+                provide: "MAIL_SERVICE",
+                useClass: mail_service_1.MailService,
+            },
+            {
+                provide: "NOTIFICATIONS_SERVICE",
+                useClass: user_notifications_service_1.UserNotificationsService,
+            },
+        ],
+    })
+], UsersModule);
+exports.UsersModule = UsersModule;
+//# sourceMappingURL=users.module.js.map

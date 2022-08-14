@@ -1,0 +1,32 @@
+import { Response } from "express";
+import { MailService } from "src/utils/mail/mail.service";
+import { UpdateSettingsDto } from "../dtos/UpdateSetting.dto";
+import { UpdateUserByAdminDto } from "../dtos/UpdateUserByAdminDto";
+import { CommonCrudService } from "./common-crud.service";
+export declare class CommonCrudController {
+    private readonly mailService;
+    private readonly commonCrudService;
+    constructor(mailService: MailService, commonCrudService: CommonCrudService);
+    getNotifications(res: Response, userid: string): Promise<Response<any, Record<string, any>>>;
+    getUserKycDetails(res: Response, body: any): Promise<Response<any, Record<string, any>>>;
+    getUserSips(res: Response, id: string): Promise<Response<any, Record<string, any>>>;
+    getAllUsers(): Promise<import("../../modules/entities").User[]>;
+    GetRepositoyEntriesCount2(res: Response): Promise<Response<any, Record<string, any>>>;
+    getSIPByTokenCode(res: Response, body: any): Promise<Response<any, Record<string, any>>>;
+    update(res: Response, id: string, updateUserByAdminDto: UpdateUserByAdminDto): Promise<Response<any, Record<string, any>>>;
+    updateSettings(res: Response, updateSettingsDto: UpdateSettingsDto): Promise<Response<any, Record<string, any>>>;
+    getEnabledUsers(res: Response): Promise<Response<any, Record<string, any>>>;
+    getStatesList(res: Response, body: any): Promise<Response<any, Record<string, any>>>;
+    getCountryList(res: Response): Promise<Response<any, Record<string, any>>>;
+    changeUserDeleteStatus(res: Response, body: any): Promise<Response<any, Record<string, any>>>;
+    changeUserStatus(res: Response, body: any): Promise<Response<any, Record<string, any>>>;
+    getDisabledUsers(res: Response): Promise<Response<any, Record<string, any>>>;
+    getAllRecords(res: Response, repository: string): Promise<Response<any, Record<string, any>>>;
+    getAll(res: Response, repository: string, id: string): Promise<Response<any, Record<string, any>>>;
+    getRepoContent(res: Response, repository: string): Promise<Response<any, Record<string, any>>>;
+    toggleStatus(res: Response, repository: string, id: string): Promise<Response<any, Record<string, any>>>;
+    GetRepositoyEntriesCount(res: Response, repository: string): Promise<Response<any, Record<string, any>>>;
+    getAddressDetails(res: Response, id: string): Promise<Response<any, Record<string, any>>>;
+    getUserById(res: Response, id: string): Promise<Response<any, Record<string, any>>>;
+    deleteSoft(res: Response, repository: string, id: string): Promise<Response<any, Record<string, any>>>;
+}
